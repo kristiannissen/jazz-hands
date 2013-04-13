@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+OPTIONS="commit test deploy"
+
+select opt in $OPTIONS; do
+  if [ "$opt" = "commit" ]; then
+    echo Enter comment
+    read COMMENT
+    eval "git add ."
+    eval "git commit -m\"$NAME\""
+    eval "git push"
+    exit
+  fi
+done
