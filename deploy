@@ -5,11 +5,10 @@ OPTIONS="commit test deploy"
 select opt in $OPTIONS; do
   if [ "$opt" = "commit" ]; then
     eval "find . -name *.pyc -print0 | xargs -0 rm"
-    
-    echo Enter comment
-    read COMMENT
+    echo Enter commit message
+    read MSG
     eval "git add ."
-    eval "git commit -m \"$COMMENT\""
+    eval "git commit -m \"$MSG\""
     eval "git push"
     exit
   fi
