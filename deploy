@@ -7,7 +7,7 @@ select opt in $OPTIONS; do
     echo Enter comment
     read COMMENT
     eval "git add ."
-    eval "git commit -m\"$NAME\""
+    eval "git commit -m \"$COMMENT\""
     eval "git push"
     exit
   fi
