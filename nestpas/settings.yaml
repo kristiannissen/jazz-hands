@@ -1,0 +1,6 @@
+database:
+  development:
+    driver: 'sqlite'
+    path: 'nestpas.sqlite'
+templates:
+  path: 'templates'

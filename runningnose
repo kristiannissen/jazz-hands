@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+
+control_c(){
+  echo -en "\n*** Whipe that nose ***\n"
+  exit $?
+}
+
+trap control_c SIGINT
+
+while true; do
+  eval "rm db_nestpas.sqlite"
+  eval "nosetests tests/nestpas_tests.py"
+  
+  sleep 5
+done
