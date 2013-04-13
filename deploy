@@ -4,6 +4,8 @@ OPTIONS="commit test deploy"
 
 select opt in $OPTIONS; do
   if [ "$opt" = "commit" ]; then
+    eval "find . -name *.pyc -print0 | xargs -0 rm"
+    
     echo Enter comment
     read COMMENT
     eval "git add ."
