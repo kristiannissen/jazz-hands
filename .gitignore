@@ -1,1 +1,4 @@
 *.pyc
+*.sqlite
+*.db
+settings.yaml
