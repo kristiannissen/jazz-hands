@@ -1,15 +1,19 @@
 #! /usr/bin/env bash
 
-OPTIONS="commit test deploy"
+OPTIONS="commit cleanup deploy"
 
 select opt in $OPTIONS; do
   if [ "$opt" = "commit" ]; then
-    eval "find . -name *.pyc -print0 | xargs -0 git rm"
     echo Enter commit message
     read MSG
     eval "git add ."
     eval "git commit -m \"$MSG\""
     eval "git push"
     exit
+  
+  elif [ "$opt" = "cleanup" ]; then
+    eval "find . -name *.pyc -print0 | xargs -0 git rm"
+    exit
+  
   fi
 done

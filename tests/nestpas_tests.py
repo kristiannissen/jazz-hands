@@ -1,9 +1,11 @@
 from nose.tools import *
+from paste.fixture import TestApp
 
 from nestpas.config import Config
 from nestpas.models.entities import *
 from nestpas.router import Router
 from nestpas.handlers import *
+from myapp import app
 
 import logging
 import re
@@ -58,9 +60,11 @@ def test_router():
 def test_handlers_render():
   home = HomeHandler()
   
-  assert_equal(hasattr(home, "render"), True)
+  assert_equal(callable(getattr(home, "render_view")), True)
 
-def test_hanlders_render_template():
-  home = HomeHandler()
-  
-  assert_not_equal(home.render().__class__, object)
+def test_handlers_home():
+  mw = []
+  testApp = TestApp(app.wsgifunc(*mw))
+  req = testApp.get('/')
+  assert_equal(req.status, 200)
+  req.mustcontain("Hello Kitty")
