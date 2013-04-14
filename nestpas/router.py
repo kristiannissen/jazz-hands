@@ -4,7 +4,8 @@ class Router(object):
   def __init__(self):
     self.urls = (
       '/', 'HomeHandler',
-      '/(\d+)', 'DocumentHandler'
+      '/login/', 'LoginHandler',
+      '/user/', 'UserHandler'
     )
   
   def get_routes(self):

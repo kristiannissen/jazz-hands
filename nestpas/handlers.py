@@ -2,6 +2,7 @@ import logging
 import datetime
 import os
 import web
+from web import form
 
 from nestpas.config import Config
 
@@ -23,8 +24,6 @@ class BaseHandler:
     # TODO: Make the content type depend on file extension
     web.header("Content-Type", "text/html")
     
-    logging.debug("Template file %s with extension %s" % (template_file, self.file_extension))
-    
     output = web.template.frender(template_file)
     return output(values)
 
@@ -37,3 +36,27 @@ class DocumentHandler(BaseHandler):
   def GET(self, id=None):
     """ Get document """
     return self.render_view("Kitty says muuh", 'home.html')
+
+class LoginHandler(BaseHandler):
+  def GET(self):
+    """ Show login form """
+    loginform = self.get_form()
+    
+    return self.render_view(loginform)
+  
+  def POST(self):
+    """ Process form submit """
+    web.header("Content-Type", "text/html")
+    return "Hello"
+    
+  def get_form(self):
+    return form.Form(
+      form.Textbox('mail'),
+      form.Password('password'),
+      form.Button('Login')
+    )
+
+class UserHandler(BaseHandler):
+  def GET(self, id=None):
+    """ User page """
+    return self.render_view("Kitty")

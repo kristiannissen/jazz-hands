@@ -10,6 +10,7 @@ class BaseModel(Model):
 
 class User(BaseModel):
   mail = CharField(null=True)
+  password = CharField()
 
 class Document(BaseModel):
   title = CharField(max_length=255)
