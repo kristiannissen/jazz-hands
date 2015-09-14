@@ -5,6 +5,7 @@ import web
 from web import form
 
 from nestpas.config import Config
+from nestpas.models import *
 
 class BaseHandler:
   template_file = None
@@ -30,6 +31,7 @@ class BaseHandler:
 class HomeHandler(BaseHandler):
   def GET(self):
     """ Show Home page """
+    doc = Document.select().get()
     return self.render_view("Hello Kitty")
 
 class DocumentHandler(BaseHandler):

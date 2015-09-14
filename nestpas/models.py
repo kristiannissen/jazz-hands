@@ -2,11 +2,15 @@ from peewee import *
 import datetime
 import re
 
-db = SqliteDatabase('db_nestpas.sqlite')
+# db = SqliteDatabase('db_nestpas.sqlite')
+
+def get_db():
+  db = SqliteDatabase('db_nestpas.sqlite')
+  return db
 
 class BaseModel(Model):
   class Meta:
-    database = db
+    database = get_db()
 
 class User(BaseModel):
   mail = CharField(null=True)
@@ -22,7 +26,7 @@ class Document(BaseModel):
   published = BooleanField(default=False)
   slug = CharField()
 
-db.connect()
+# db.connect()
 
 User.drop_table(True)
 User.create_table(True)
