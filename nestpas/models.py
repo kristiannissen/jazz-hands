@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from peewee import *
 import datetime
 import re
