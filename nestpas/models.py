@@ -1,11 +1,20 @@
 from peewee import *
 import datetime
 import re
+import logging
 
+from nestpas.config import Config
+from nestpas.utils import *
 # db = SqliteDatabase('db_nestpas.sqlite')
 
+config = Config()
+
 def get_db():
-  db = SqliteDatabase('db_nestpas.sqlite')
+  if is_test():
+    db = SqliteDatabase(config.get_settings_for('database')['development']['path'])
+  else:
+    db = None
+
   return db
 
 class BaseModel(Model):
@@ -28,8 +37,9 @@ class Document(BaseModel):
 
 # db.connect()
 
-User.drop_table(True)
-User.create_table(True)
+def migrate():
+  User.drop_table(True)
+  User.create_table(True)
 
-Document.drop_table(True)
-Document.create_table(True)
+  Document.drop_table(True)
+  Document.create_table(True)

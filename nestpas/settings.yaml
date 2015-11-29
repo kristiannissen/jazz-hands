@@ -1,6 +1,6 @@
 database:
   development:
-    driver: 'sqlite'
-    path: 'nestpas.sqlite'
+    path: 'db_nestpas.sqlite'
 templates:
   path: 'templates'
+  layout: 'layout'

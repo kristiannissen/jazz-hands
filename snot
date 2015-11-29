@@ -10,6 +10,6 @@ trap control_c SIGINT
 while true; do
   eval "rm db_nestpas.sqlite"
   eval "WEBPY_ENV=test nosetests tests/nestpas_tests.py"
-  
+ 
   sleep 5
 done
