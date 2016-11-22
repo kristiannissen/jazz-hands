@@ -22,5 +22,5 @@ class Index(RenderHelper):
     def GET(self):
         """ Index page """
         render = self.render_with_layout()
-        return render.home('Kitty')
+        return render.home('Pussy')
 
