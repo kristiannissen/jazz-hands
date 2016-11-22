@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 class Router(object):
-  def __init__(self):
-    self.urls = (
-      '/', 'HomeHandler',
-      '/login/', 'LoginHandler',
-      '/user/', 'UserHandler'
-    )
+    def __init__(self):
+        self.urls = (
+            '/', 'Index'
+        )
   
-  def get_routes(self):
-    return self.urls
+    def get_routes(self):
+        return self.urls

@@ -8,7 +8,7 @@ control_c(){
 trap control_c SIGINT
 
 while true; do
-  eval "rm db_nestpas.sqlite"
+  eval "rm db_test_nestpas.sqlite"
   eval "WEBPY_ENV=test nosetests tests/nestpas_tests.py"
  
   sleep 5

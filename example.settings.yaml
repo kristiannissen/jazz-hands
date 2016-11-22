@@ -1,6 +1,8 @@
 database:
-  development:
-    path: 'db_nestpas.sqlite'
+  test:
+    path: ''
+  production:
+    path: ''
 templates:
   path: 'templates'
   layout: 'layout'

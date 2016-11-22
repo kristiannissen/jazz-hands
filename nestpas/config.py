@@ -4,7 +4,7 @@ import yaml
 
 class Config(object):
   def __init__(self):
-    file_path = os.path.join(os.path.dirname(__file__), 'settings.yaml')
+    file_path = os.path.join(os.path.dirname(__file__), '../', 'settings.yaml')
     with open(file_path) as f:
       self.yaml_data = yaml.load(f)
 

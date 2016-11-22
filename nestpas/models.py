@@ -6,15 +6,19 @@ import logging
 
 from nestpas.config import Config
 from nestpas.utils import *
-# db = SqliteDatabase('db_nestpas.sqlite')
 
 config = Config()
 
 def get_db():
   if is_test():
-    db = SqliteDatabase(config.get_settings_for('database')['development']['path'])
+    db = SqliteDatabase(
+            config.get_settings_for('database')['test']['path']
+        )
   else:
-    db = None
+    db = SqliteDatabase(
+            config.get_settings_for('database')['production']['path'],
+            threadlocals=True
+        )
 
   return db
 
@@ -36,7 +40,7 @@ class Document(BaseModel):
   published = BooleanField(default=False)
   slug = CharField()
 
-# db.connect()
+# get_db().connect()
 
 def migrate():
   User.drop_table(True)
