@@ -22,6 +22,7 @@ mercurial==2.8.2
 numpy==1.8.2
 oauth==1.0.1
 paramiko==1.10.1
+peewee==2.8.5
 pexpect==3.1
 pycrypto==2.6.1
 pygobject==3.12.0
