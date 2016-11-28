@@ -12,7 +12,7 @@ import re
 
 def setup_func():
     migrate()
-  
+
     test_user = User(mail="chunkylover53@aol.com", password="chunkylover53")
     test_user.save()
 
@@ -36,30 +36,30 @@ def test_config_get_settings_for_none():
 def test_user_mail():
     test_mail = "chunkylover53@aol.com"
     user = User.get(User.mail == test_mail)
-  
+
     assert_equal(user.mail, test_mail)
 
 @with_setup(setup_func, teardown_func)
 def test_document_title():
     test_user = User.get(User.mail == "chunkylover53@aol.com")
-  
+
     test_title = "Hello Kitty"
     # TODO: Better way of handling slugs
     doc = Document(title=test_title, user=test_user, slug=re.sub(r'[^a-z0-9]', '-', test_title.lower()))
     doc.save()
-  
+
     assert_equal(doc.title, test_title)
 
 @with_setup(setup_func, teardown_func)
 def test_user_documents():
     test_user = User.get(User.mail == "chunkylover53@aol.com")
-  
+
     for i in [1,2,3,4,5]:
         test_title = "Hello Kitty no %d" % i
         doc = Document(title=test_title, user=test_user)
         doc.slug = re.sub(r'[^a-z0-9]', '-', test_title.lower())
         doc.save()
-  
+
     assert_equal(test_user.documents.count(), 5)
 
 def test_handlers_index():

@@ -3,7 +3,9 @@
 class Router(object):
     def __init__(self):
         self.urls = (
-            '/', 'Index'
+            '/', 'Index',
+            '/adgang', 'Login',
+            '/admin/latest', 'Latest'
         )
   
     def get_routes(self):

@@ -22,15 +22,15 @@ def get_db():
 
   return db
 
-class BaseModel(Model):
+class MyBaseModel(Model):
   class Meta:
     database = get_db()
 
-class User(BaseModel):
+class User(MyBaseModel):
   mail = CharField(null=True)
   password = CharField()
 
-class Document(BaseModel):
+class Document(MyBaseModel):
   title = CharField(max_length=255)
   when_created = TimeField(default=datetime.datetime.now)
   when_changed = TimeField(null=True)
