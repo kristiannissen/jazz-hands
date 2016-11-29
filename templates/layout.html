@@ -19,5 +19,17 @@ $def with (content)
       <footer class="mdl-mini-footer">Footer</footer>
     </div>
     </div>
+
+    <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+      <div class="mdl-snackbar__text"></div>
+      <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+    <script src="/static/js/require.js"></script>
+    $if content.jsfiles:
+      $for f in content.jsfiles.split():
+        <script>
+          require('$f');
+        </script>
   </body>
 </html>

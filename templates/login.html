@@ -1,16 +1,17 @@
 $def with (values)
 $var title: Login
+$var jsfiles: login.js
 
 <div class="mdl-grid">
     <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
         <div class="mdl-color-text--grey-700 mdl-card__supporting-text">
             <form action="/adgang" id="form__login" method="post" autocomplete="off">
               <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" name="user_mail" type="text" id="user-mail">
+                    <input class="mdl-textfield__input" name="user_mail" type="text" id="user-mail" required>
                     <label class="mdl-textfield__label" for="user-mail">Username</label>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" name="user_pwd" type="password" id="user-pwd">
+                    <input class="mdl-textfield__input" name="user_pwd" type="password" id="user-pwd" required>
                     <label class="mdl-textfield__label" for="user-pwd">Password</label>
                   </div>
                   <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
