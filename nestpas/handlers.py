@@ -35,11 +35,19 @@ class Index(RenderHelper):
     def GET(self):
         """ Index page """
         render = self.render_with_layout()
-        return render.home('Pussy')
+        return render.home('Hello, Pussy')
 
 class Login(RenderHelper):
     def GET(self):
         """ Serves login form """
+        remember = web.cookies()
+        if remember['remember-me']:
+            user = User.get(User.hashed_key == remember['hashed_key'])
+            if user:
+                session.logged_in = True
+                session.user_mail = user.mail
+                raise web.seeother('/admin/latest')
+
         render = self.render_with_layout()
         return render.login({})
 
@@ -47,7 +55,12 @@ class Login(RenderHelper):
         """ Handles form post """
         inp = web.input()
         user = User.get((User.mail == inp.user_mail) & (User.password == inp.user_pwd))
-        logging.warn(user)
+        # FIXME: Hash remember and store in DB
+        if inp.user_remember == '1':
+            web.setcookie('remember-me', hashlib.md5(user.mail).hexdigest(), 3600)
+            user.hashed_key = hashlib.md5(user.mail).hexdigest()
+            user.save()
+
         if user:
             session.logged_in = True
             session.user_mail = user.mail
@@ -63,3 +76,10 @@ class Latest(RenderHelper):
             return render.latest({'user_mail': session.user_mail})
         else:
             raise web.seeother("/adgang")
+
+class Document(RenderHelper):
+    def GET(self):
+        render = self.render_with_admin()
+        return render.document_form({})
+
+

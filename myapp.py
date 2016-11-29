@@ -2,11 +2,14 @@
 import web
 import logging
 
+from livereload import Server
+
 from nestpas import models
-from nestpas.config import Config
 from nestpas.router import Router
 from nestpas.handlers import *
 from nestpas.utils import *
+
+web.config.debug = True
 
 app = web.application(Router().get_routes(), globals())
 
@@ -20,5 +23,9 @@ def connection_processor(handler):
 
 app.add_processor(connection_processor)
 
+if is_test():
+    web.webapi.internalerror = web.debugerror
+
 if (__name__ == "__main__"):
     app.run()
+

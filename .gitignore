@@ -5,3 +5,6 @@ settings.yaml
 .DS_Store
 gitcommit
 settings.yaml
+venv
+setuptools-29.0.1.zip
+sessions

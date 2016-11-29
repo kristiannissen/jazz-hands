@@ -29,6 +29,7 @@ class MyBaseModel(Model):
 class User(MyBaseModel):
   mail = CharField(null=True)
   password = CharField()
+  hashed_key = CharField()
 
 class Document(MyBaseModel):
   title = CharField(max_length=255)

@@ -8,3 +8,6 @@
 #form__login {
     max-width: 320px;
 }
+.mdl-checkboxfield {
+    margin: 15px 0;
+}
