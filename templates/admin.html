@@ -2,6 +2,7 @@ $def with (content)
 <!DOCTYPE html>
 <html lang="en">
   <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
     <title>$content.title</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -24,16 +25,16 @@ $def with (content)
         <div class="mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
           <header></header>
           <nav class="mdl-navigation mdl-color--blue-grey-800">
-            <a href="/admin/latest" class="mdl-navigation__link">Home</a>
-            <a href="/admin/media" class="mdl-navigation__link">Media</a>
-            <a href="/admin/users" class="mdl-navigation__link">Users</a>
-            <a href="/admin/documents" class="mdl-navigation__link">Documents</a>
+            <a href="/admin/" class="mdl-navigation__link">Home</a>
+            <a href="/media/" class="mdl-navigation__link">Media</a>
+            <a href="/user/" class="mdl-navigation__link">User</a>
+            <a href="/blog/" class="mdl-navigation__link">Blog</a>
           </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
           <div class="mdl-grid">
             <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-              <div class="mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">hello</div>
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">$:content</div>
             </div>
           </div>
         </main>

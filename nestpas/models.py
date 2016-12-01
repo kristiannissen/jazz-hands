@@ -10,42 +10,34 @@ from nestpas.utils import *
 config = Config()
 
 def get_db():
-  if is_test():
-    db = SqliteDatabase(
-            config.get_settings_for('database')['test']['path']
-        )
-  else:
-    db = SqliteDatabase(
-            config.get_settings_for('database')['production']['path'],
-            threadlocals=True
-        )
+    return SqliteDatabase('dev.db', threadlocals = True)
 
-  return db
 
 class MyBaseModel(Model):
-  class Meta:
-    database = get_db()
+    class Meta:
+        database = get_db()
 
 class User(MyBaseModel):
-  mail = CharField(null=True)
-  password = CharField()
-  hashed_key = CharField()
+    mail = CharField(null=True)
+    password = CharField()
+    hashed_key = CharField()
 
-class Document(MyBaseModel):
-  title = CharField(max_length=255)
-  when_created = TimeField(default=datetime.datetime.now)
-  when_changed = TimeField(null=True)
-  body_text = TextField(null=True)
-  # SomeUser.documents returns list of a users documents
-  user = ForeignKeyField(User, related_name="documents")
-  published = BooleanField(default=False)
-  slug = CharField()
+class BlogPost(MyBaseModel):
+    title = CharField(max_length=255)
+    when_created = TimeField(default=datetime.datetime.now)
+    when_changed = TimeField(null=True)
+    content = TextField(null=True)
+    # SomeUser.documents returns list of a users documents
+    # user = ForeignKeyField(User, related_name="blogposts")
+    published = BooleanField(default=False)
+    slug = CharField()
 
 # get_db().connect()
 
 def migrate():
-  User.drop_table(True)
-  User.create_table(True)
+    User.drop_table(True)
+    User.create_table(True)
+ 
+    BlogPost.drop_table(True)
+    BlogPost.create_table(True)
 
-  Document.drop_table(True)
-  Document.create_table(True)

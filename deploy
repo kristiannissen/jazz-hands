@@ -3,6 +3,8 @@
 OPTIONS="commit cleanup deploy"
 
 select opt in $OPTIONS; do
+  echo "$opt it is!"
+
   if [ "$opt" = "commit" ]; then
     echo Enter commit message
     read MSG
@@ -12,7 +14,8 @@ select opt in $OPTIONS; do
     exit
   
   elif [ "$opt" = "cleanup" ]; then
-    eval "find . -name *.pyc -print0 | xargs -0 git rm"
+    # eval "find . -name *.pyc -print0 | xargs -0 git rm"
+      eval "find nestpas/ -name *.pyc -print0"
     exit
   
   fi

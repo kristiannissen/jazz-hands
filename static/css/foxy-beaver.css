@@ -1,13 +1,19 @@
 .mdl-card__supporting-text p {
-    max-width: 512px;
-    margin: 16px auto;
-    font-size: 16px;
-    line-height: 28px;
+  max-width: 512px;
+  margin: 16px auto;
+  font-size: 16px;
+  line-height: 28px;
 }
 
 #form__login {
-    max-width: 320px;
+  max-width: 320px;
 }
 .mdl-checkboxfield {
-    margin: 15px 0;
+  margin: 15px 0;
+}
+
+/* Admin Blog */
+#form__blog .form_input_container {
+  display: block;
+  width: 100%;
 }
