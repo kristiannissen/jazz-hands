@@ -13,17 +13,6 @@ var App = (function () {
         snackbar = document.getElementById('snackbar'),
         url = document.location.pathname.split('/');
 
-    if ( typeof parseInt(url.pop()) !== 'NaN' ) {
-      foo.setAttribute('action', document.location.pathname);
-      require( 'http.js', function () {
-        http.get( document.location.pathname, {
-          'Content_Type': 'application/json'
-        }).then( function ( resp ) {
-          console.log( resp );  
-        });
-      });
-    }
-
     foo.addEventListener('submit', function(e) {
       e.preventDefault();
 

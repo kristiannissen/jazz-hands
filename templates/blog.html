@@ -16,9 +16,9 @@ $var jsfiles: blog.js
         <div class="mdl-textfield mdl-js-textfield form_input_container">
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-online">
             $if values['blog_online'] == 1:
-              <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input">
+              <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input" checked>
             $else:
-              <input type="checkbox" id="blog-online" name="blog_online" value="0" class="mdl-switch__input">
+              <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input">
             <span class="mdl-switch__label">Online</span>
           </label>
         </div>

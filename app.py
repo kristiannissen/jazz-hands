@@ -6,7 +6,7 @@ import sys
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-web.config.debug = False
+# web.config.debug = False
 
 app = web.application(urls, globals(), autoreload = True)
 
