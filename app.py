@@ -10,13 +10,13 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 app = web.application(urls, globals(), autoreload = True)
 
-if not web.config.get('session'):
+if not web.config.get('_session'):
     init = {'auth': ''}
     store = web.session.DiskStore('./sessions')
     session = web.session.Session(app, store, initializer = init)
-    web.config.session = session
+    web.config._session = session
 else:
-    session = web.config.session
+    session = web.config._session
 
 if __name__ == '__main__':
     app.run()
