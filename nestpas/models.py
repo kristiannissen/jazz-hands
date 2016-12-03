@@ -23,13 +23,13 @@ class User(MyBaseModel):
     hashed_key = CharField()
 
 class BlogPost(MyBaseModel):
-    title = CharField(max_length=255)
+    title = CharField(max_length = 255)
     when_created = TimeField(default=datetime.datetime.now)
-    when_changed = TimeField(null=True)
-    content = TextField(null=True)
+    when_changed = TimeField(null = True)
+    content = TextField(null = True)
     # SomeUser.documents returns list of a users documents
     # user = ForeignKeyField(User, related_name="blogposts")
-    published = BooleanField(default=False)
+    online = IntegerField(default = 0)
     slug = CharField()
 
 # get_db().connect()

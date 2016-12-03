@@ -39,18 +39,34 @@ class About:
 class Admin:
     def GET(self):
         """ Admin """
+        posts = BlogPost.select().order_by(
+                BlogPost.when_created.desc()
+            ).paginate(0, 10)
+
         render = web.template.render(base="admin")
         return render.latest({
-            "user_mail": "hello@kitty.com"
+            "user_mail": "Kitty",
+            "blog_posts": posts
         })
 
 
 class Blog:
     def GET(self, blog_id=None):
         """ Blog """
-        logging.debug(blog_id)
+        if blog_id is None:
+            """ Create a new BlogPost """
+            post = BlogPost(title="", content="")
+        else:
+            """ Exit existing BlogPost """
+            post = BlogPost.get(BlogPost.id == blog_id)
+
         render = web.template.render(base="admin")
-        return render.blog({})
+        return render.blog({
+            "blog_id": post.id,
+            "blog_title": post.title,
+            "blog_content": post.content,
+            "blog_online": post.online
+        })
 
     def POST(self, blog_id=None):
         """ Handle creating and editing blog posts """
@@ -58,12 +74,18 @@ class Blog:
         logging.debug(inp)
         logging.debug(blog_id)
 
-        blogpost = BlogPost(title = inp.blog_title, content = inp.blog_content,
-            slug = slugify(inp.blog_title))
+        if blog_id:
+            blogpost = BlogPost.get(BlogPost.id == blog_id)
+        else:
+            blogpost = BlogPost()
+
+        blogpost.title = inp.blog_title
+        blogpost.content = inp.blog_content
+        blogpost.online = inp.blog_online
         blogpost.save()
 
         web.header("Content_Type", "application/json; charset=utf=8")
-        return json.dumps({"blog_id": blogpost.id}, sort_keys=True, indent=4,
+        return json.dumps({"blog_id": blogpost.id, "blog_slug": blogpost.slug}, sort_keys=True, indent=4,
             separators=(",", ": "))
 
 

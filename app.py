@@ -8,7 +8,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 web.config.debug = False
 
-app = web.application(urls, globals())
+app = web.application(urls, globals(), autoreload = True)
 
 if not web.config.get('session'):
     init = {'auth': ''}

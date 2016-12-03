@@ -4,18 +4,21 @@ $var jsfiles: blog.js
 
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col">
-      <form action="/blog/" method="post" id="form__blog">
+      <form action="/blog/$values['blog_id']" method="post" id="form__blog">
         <div class="mdl-textfield mdl-js-textfield form_input_container">
-          <input class="mdl-textfield__input" type="text" id="blog-title" name="blog_title">
+          <input class="mdl-textfield__input" type="text" id="blog-title" name="blog_title" value="$values['blog_title']">
           <label class="mdl-textfield__label" for="blog-title">Blog Title</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield form_input_container">
-          <textarea class="mdl-textfield__input" type="text" rows="15" id="blog-content" name="blog_content"></textarea>
+          <textarea class="mdl-textfield__input" type="text" rows="15" id="blog-content" name="blog_content">$values['blog_title']</textarea>
           <label class="mdl-textfield__label" for="blog-body">Blog Content</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield form_input_container">
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-online">
-            <input type="checkbox" id="blog-online" name="blog_online" class="mdl-switch__input">
+            $if values['blog_online'] == 1:
+              <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input">
+            $else:
+              <input type="checkbox" id="blog-online" name="blog_online" value="0" class="mdl-switch__input">
             <span class="mdl-switch__label">Online</span>
           </label>
         </div>

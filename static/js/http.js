@@ -33,15 +33,34 @@ var http = (function () {
         client.send();
         client.onload = function () {
           if ( this.status >= 200 && this.status < 300 ) {
-            resolve ( this.response );
+            resolve ( JSON.parse( this.response ) );
           } else {
-            reject ( {'status': this.status, 'text': this.statusText} );
+            reject ( {
+              'status': this.status,
+              'text': this.statusText
+            } );
           }
         };
         client.onerror = function () {
           reject ( this.statusText );
         }
       });
+    },
+    serialize: function( form ) {
+      var i, e, l = form.elements.length, o = {};
+      for ( i = 0; i < l; i++ ) {
+        e = form.elements[i];
+        if ( e.nodeName !== 'BUTTON' ) {
+          if ( ['text', 'mail'].includes( e.type ) || e.nodeName === 'TEXTAREA') {
+            o[e.name] = e.value;
+          } else if ( ['radio', 'checkbox'].includes( e.type ) ) {
+            if ( e.checked ) {
+              o[e.name] = e.value || true;
+            }
+          }
+        }
+      }
+      return o;
     }
   };
 
@@ -51,6 +70,9 @@ var http = (function () {
     },
     'post': function ( url, args, headers ) {
       return core.ajax('POST', url, args, headers);
+    },
+    'serialize': function ( form ) {
+      return core.serialize( form );
     }
   };
 })();
