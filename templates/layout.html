@@ -10,13 +10,27 @@ $def with (content)
     <link rel="stylesheet" href="/static/css/foxy-beaver.css">
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
   </head>
-  <body>
+  <body itemscope itemtype="http://schema.org/WebPage">
     <div class="mdl-layout__container">
       <div class="mdl-layout mdl-js-layout">
       <main class="mdl-layout__content">
         <div class="page-content">$:content</div>
       </main>
-      <footer class="mdl-mini-footer">Footer</footer>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col">
+            <nav>
+              <a href="/">
+                Home
+              </a>
+              <a href="/contact/">
+                Contact
+              </a>
+            </nav>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col"></div>
+        </div>        
+      </footer>
     </div>
     </div>
 

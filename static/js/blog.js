@@ -28,7 +28,7 @@ var App = (function () {
           .then( function ( resp ) {
 
             snackbar.MaterialSnackbar.showSnackbar({
-              message: 'Blog Post Created',
+              message: 'Blog Saved',
               actionHandler: function(event) {
                 event.preventDefault();
 

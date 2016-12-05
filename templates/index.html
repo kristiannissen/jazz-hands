@@ -1,0 +1,18 @@
+$def with (values)
+$var title: Index
+$var jsfiles: home.js
+
+<div class="mdl-grid">
+  $for post in values['posts']:
+    <div class="mdl-card mdl-cell--8-col">
+        <div class="mdl-card__title">
+            <h3><a href="/post/$post.slug/">$post.title</a></h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          $post.when_created
+        </div>
+        <div class="mdl-card__supporting-text">
+          $post.content
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 $def with (values)
-$var title: Hello $values['user_mail']
+$var title: Latest
 $var jsfiles: latest.js
 
 <div class="mdl-grid">
@@ -8,12 +8,15 @@ $var jsfiles: latest.js
     $for post in values['blog_posts']:
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          <i class="material-icons mdl-list__item-avatar">person</i>
+          <i class="material-icons mdl-list__item-avatar">mode_edit</i>
           <a href="/blog/$post.id">$post.title</a>
         </span>
         <span class="mdl-list__item-secondary-action">
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
-            <input type="checkbox" class="mdl-switch__input">
+            $if post.online == 1:
+              <input name="blog_online" value="1" data-blog-id="$post.id" checked type="checkbox" class="mdl-switch__input">
+            $else:
+              <input name="blog_online" value="1" type="checkbox" data-blog-id="$post.id" class="mdl-switch__input">
           </label>
         </span>
       </li>

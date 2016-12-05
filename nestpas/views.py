@@ -15,25 +15,26 @@ HASH_SALT = "supersecrethashsalt"
 class Index:
     def GET(self):
         """ Index view """
-        return "Hello Kitty"
+        posts =BlogPost.select().where(BlogPost.online == 1).order_by(
+                BlogPost.when_created.desc()
+            ).paginate(0, 10)
+
+        render = web.template.render(base="layout")
+        return render.index({
+                "posts": posts
+            })
 
 
-class Contact:
-    def GET(self):
-        """ Contact view """
-        return "Contact"
+class Post:
+    def GET(self, post_slug):
+        """ Render single post """
+        post = BlogPost.get(BlogPost.slug == post_slug)
 
-
-class Newsletter:
-    def GET(self):
-        """ Newsletter """
-        return "Newsletter"
-
-
-class About:
-    def GET(self):
-        """ About """
-        return "About"
+        render = web.template.render(base="layout")
+        return render.post({
+                "blogpost_title": post.title,
+                "blogpost_content": post.content
+            })
 
 
 class Admin:
@@ -79,9 +80,15 @@ class Blog:
         else:
             blogpost = BlogPost()
 
-        blogpost.title = inp.blog_title
-        blogpost.content = inp.blog_content
-        blogpost.online = inp.blog_online
+        if inp.blog_title:
+            blogpost.title = inp.blog_title
+        
+        if inp.blog_content:
+            blogpost.content = inp.blog_content
+        
+        if inp.blog_online is None:
+            blogpost.online = inp.blog_online
+
         blogpost.save()
 
         web.header("Content_Type", "application/json; charset=utf=8")

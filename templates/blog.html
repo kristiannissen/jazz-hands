@@ -22,6 +22,15 @@ $var jsfiles: blog.js
             <span class="mdl-switch__label">Online</span>
           </label>
         </div>
+        <div class="mdl-textfield mdl-js-textfield form_input_container">
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-newsletter">
+            $if values['blog_online'] == 1:
+              <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input" checked>
+            $else:
+              <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input">
+            <span class="mdl-switch__label">Send as Newsletter</span>
+          </label>
+        </div>
         <div class="form_input_container">
           <button type="submit" id="form_button_submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
             Save

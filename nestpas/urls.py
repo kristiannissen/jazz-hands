@@ -2,11 +2,8 @@
 
 urls = (
     '/', 'Index',
-    '/kontakt/', 'Contact',
-    '/nyhedsbrev/', 'Newsletter',
-    '/om-bestyrelsen/', 'About',
+    '/post/(.+)?/', 'Post',
     '/login/', 'Login',
-    '/logout/', 'Logout',
     '/admin/', 'Admin',
     '/media/', 'Media',
     '/user/', 'User',
