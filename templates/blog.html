@@ -10,26 +10,40 @@ $var jsfiles: blog.js
           <label class="mdl-textfield__label" for="blog-title">Blog Title</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield form_input_container">
-          <textarea class="mdl-textfield__input" type="text" rows="15" id="blog-content" name="blog_content">$values['blog_title']</textarea>
+          <textarea class="mdl-textfield__input" type="text" rows="15" id="blog-content" name="blog_content">$values['blog_content']</textarea>
           <label class="mdl-textfield__label" for="blog-body">Blog Content</label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield form_input_container">
-          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-online">
-            $if values['blog_online'] == 1:
-              <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input" checked>
-            $else:
-              <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input">
-            <span class="mdl-switch__label">Online</span>
-          </label>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield form_input_container">
+              <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-online">
+                $if values['blog_online'] == 1:
+                  <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input" checked>
+                $else:
+                  <input type="checkbox" id="blog-online" name="blog_online" value="1" class="mdl-switch__input">
+                <span class="mdl-switch__label">Online</span>
+              </label>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield form_input_container">
+              <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-newsletter">
+                $if values['blog_online'] == 1:
+                  <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input" checked>
+                $else:
+                  <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input">
+                <span class="mdl-switch__label">Send as Newsletter</span>
+              </label>
+            </div>
+          </div>
         </div>
-        <div class="mdl-textfield mdl-js-textfield form_input_container">
-          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-newsletter">
-            $if values['blog_online'] == 1:
-              <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input" checked>
-            $else:
-              <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input">
-            <span class="mdl-switch__label">Send as Newsletter</span>
-          </label>
+        <div class="form_input_container">
+          <select name="blog_theme" id="blog-theme">
+            <option value="">---</option>
+          $for mediafile in values['media_files']:
+            <option value="">$mediafile.filepath</option>
+          </select>
+          <label class="" for="blog-theme">Blog Theme</label>
         </div>
         <div class="form_input_container">
           <button type="submit" id="form_button_submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">

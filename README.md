@@ -8,3 +8,4 @@ ToDos:
 
  * Blog create/edit show list of latest files uploaded, search for more files
  * Media upload files
+ * Add post theme image

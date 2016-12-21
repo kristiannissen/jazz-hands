@@ -12,10 +12,11 @@ TEMPLATE_ADMIN = "admin"
 TEMPTATE_FRONT = "layout"
 HASH_SALT = "supersecrethashsalt"
 
+
 class Index:
     def GET(self):
         """ Index view """
-        posts =BlogPost.select().where(BlogPost.online == 1).order_by(
+        posts = BlogPost.select().where(BlogPost.online == 1).order_by(
                 BlogPost.when_created.desc()
             ).paginate(0, 10)
 
@@ -61,12 +62,16 @@ class Blog:
             """ Exit existing BlogPost """
             post = BlogPost.get(BlogPost.id == blog_id)
 
+        mediafiles = MediaFile.select().order_by(MediaFile.id).limit(10)
+
         render = web.template.render(base="admin")
         return render.blog({
             "blog_id": post.id,
             "blog_title": post.title,
+            "blog_theme": post.theme_image,
             "blog_content": post.content,
-            "blog_online": post.online
+            "blog_online": post.online,
+            "media_files": mediafiles
         })
 
     def POST(self, blog_id=None):
@@ -80,20 +85,21 @@ class Blog:
         else:
             blogpost = BlogPost()
 
-        if inp.blog_title:
-            blogpost.title = inp.blog_title
-        
-        if inp.blog_content:
-            blogpost.content = inp.blog_content
-        
-        if inp.blog_online is None:
-            blogpost.online = inp.blog_online
+        blogpost.title = inp.blog_title
+        blogpost.content = inp.blog_content
+        blogpost.slug = slugify(blogpost.title)
+
+        if 'blog_online' in inp:
+            blogpost.online = 1
+        else:
+            blogpost.online = 0
 
         blogpost.save()
 
         web.header("Content_Type", "application/json; charset=utf=8")
-        return json.dumps({"blog_id": blogpost.id, "blog_slug": blogpost.slug}, sort_keys=True, indent=4,
-            separators=(",", ": "))
+        return json.dumps(
+            {"blog_id": blogpost.id, "blog_slug": blogpost.slug},
+            sort_keys=True, indent=4, separators=(",", ": "))
 
 
 class Media:
@@ -101,6 +107,21 @@ class Media:
         """ Media """
         render = web.template.render(base="admin")
         return render.media({})
+
+    def POST(self):
+        inp = web.input(media_file={})
+        filedir = '/Users/kristiannissen/Documents/python/jazz-hands/static'
+        if 'media_file' in inp:
+            filepath = inp.media_file.filename.replace('\\', '/')
+            filename = filepath.split('/')[-1]
+
+            fout = open("{0}/{1}".format(filedir, filename), 'w')
+            fout.write(inp.media_file.file.read())
+            fout.close()
+
+            MediaFile.create(filepath=filename)
+
+        raise web.seeother('/media/')
 
 
 class User:
@@ -125,7 +146,13 @@ class Login:
         if inp.user_remember == '1':
             logging.debug("Remember me feature")
             # FIXME: Use const for cookie lifetime and hash secret
-            web.setcookie('_k', hashlib.md5("{0}-{1}".format(HASH_SALT, inp.user_mail)).hexdigest(), 360000)
+            web.setcookie(
+                '_k',
+                hashlib.md5(
+                    "{0}-{1}".format(HASH_SALT, inp.user_mail)
+                ).hexdigest(),
+                360000
+            )
 
         return "Hello ADMIN"
 
@@ -134,4 +161,3 @@ class Logout:
     def GET(self):
         """ Logout """
         return "Logout"
-

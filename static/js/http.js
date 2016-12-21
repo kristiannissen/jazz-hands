@@ -58,6 +58,8 @@ var http = (function () {
               o[e.name] = e.value || true;
             }
           }
+        } else if ( e.nodeName === 'SELECT' ) {
+          console.log(e);
         }
       }
       return o;

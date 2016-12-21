@@ -5,7 +5,10 @@ $var jsfiles: media.js
 <div class="mdl-grid">
     <div class="mdl-cell--12-col">
         <div class="mdl-color-text--grey-700 mdl-card__supporting-text">
-            
+          <form action="/media/" method="post" enctype="multipart/form-data">
+            <input type="file" name="media_file">
+            <input type="submit">
+          </form>            
         </div>
     </div>
 </div>

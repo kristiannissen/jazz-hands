@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-OPTIONS="commit cleanup deploy"
+OPTIONS="commit cleanup deploy pep"
 
 select opt in $OPTIONS; do
   echo "$opt it is!"
@@ -14,8 +14,13 @@ select opt in $OPTIONS; do
     exit
   
   elif [ "$opt" = "cleanup" ]; then
-    # eval "find . -name *.pyc -print0 | xargs -0 git rm"
-      eval "find nestpas/ -name *.pyc -print0"
+      echo "Cleaning up..."
+      eval "find nestpas/ -name '*.pyc'"
+    exit
+
+  elif [ "$opt" = "pep" ]; then
+    echo "Running pep8..."
+    eval "pep8 --first nestpas/"
     exit
   
   fi

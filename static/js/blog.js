@@ -6,7 +6,8 @@
 
 var App = (function () {
 
-  var foo = document.getElementById('form__blog');
+  var foo = document.getElementById('form__blog'),
+      fileField = document.querySelector('[type="file"]');
 
   function _run() {
     var data,
