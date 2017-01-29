@@ -34,16 +34,16 @@ class Index:
             })
 
 
-class Post:
+class Blog:
     def GET(self, post_slug):
         """ Render single post """
-        print >>sys.stderr, "hello {0}".format(post_slug)
         post = BlogPost.get(BlogPost.slug == post_slug)
 
         render = web.template.render(base="layout")
         return render.post({
                 "blogpost_title": post.title,
-                "blogpost_content": markdown(post.content)
+                "blogpost_content": post.content,
+                "blogpost_teaser": post.teaser
             })
 
 
@@ -61,7 +61,7 @@ class Admin:
         })
 
 
-class Blog:
+class Post:
     def GET(self, blog_id=None):
         """ Blog """
         if blog_id is None:
@@ -80,7 +80,8 @@ class Blog:
             "blog_theme": post.theme_image,
             "blog_content": post.content,
             "blog_online": post.online,
-            "media_files": mediafiles
+            "media_files": mediafiles,
+            "send_as_newsletter": post.send_as_newsletter
         })
 
     def POST(self, blog_id=None):
@@ -102,6 +103,11 @@ class Blog:
             blogpost.online = 1
         else:
             blogpost.online = 0
+
+        if 'send_as_newsletter' in inp:
+            blogpost.send_as_newsletter = True
+        else:
+            blogpost.send_as_newsletter = False
 
         blogpost.save()
 

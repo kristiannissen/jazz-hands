@@ -27,7 +27,12 @@ var App = (function () {
 
         http.post( foo.getAttribute( 'action' ), data)
           .then( function ( resp ) {
-            console.log(resp);
+            /**
+             * Append blog id to form action
+             */
+            if ( /[0-9]{1,}/.test(foo.getAttribute('action')) == false ) {
+              foo.setAttribute('action', foo.getAttribute('action') + resp.blog_id);
+            }
             snackbar.MaterialSnackbar.showSnackbar({
               message: 'Blog Saved',
               actionHandler: function(event) {

@@ -1,10 +1,10 @@
 $def with (values)
 $var title: Blog
-$var jsfiles: blog.js
+$var jsfiles: post.js
 
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col">
-      <form action="/blog/$values['blog_id']/" method="post" id="form__blog">
+      <form action="/post/$values['blog_id']" method="post" id="form__blog">
         <div class="mdl-textfield mdl-js-textfield form_input_container">
           <input class="mdl-textfield__input" type="text" id="blog-title" name="blog_title" value="$values['blog_title']">
           <label class="mdl-textfield__label" for="blog-title">Blog Title</label>
@@ -28,10 +28,10 @@ $var jsfiles: blog.js
           <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield form_input_container">
               <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="blog-newsletter">
-                $if values['blog_online'] == 1:
-                  <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input" checked>
+                $if values['send_as_newsletter'] == True:
+                  <input type="checkbox" id="blog-newsletter" name="send_as_newsletter" value="1" class="mdl-switch__input" checked>
                 $else:
-                  <input type="checkbox" id="blog-newsletter" name="blog_newsletter" value="1" class="mdl-switch__input">
+                  <input type="checkbox" id="blog-newsletter" name="send_as_newsletter" value="0" class="mdl-switch__input">
                 <span class="mdl-switch__label">Send as Newsletter</span>
               </label>
             </div>

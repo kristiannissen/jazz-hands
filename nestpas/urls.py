@@ -2,10 +2,10 @@
 
 urls = (
     '/', 'Index',
-    '/post/(.+)?/', 'Post',
+    '/blog/(.+)/', 'Blog',
     '/login/', 'Login',
     '/admin/', 'Admin',
     '/media/', 'Media',
     '/user/', 'User',
-    '/blog/(.+)?/', 'Blog'
+    '/post/(.+)?', 'Post'
 )

@@ -33,6 +33,7 @@ class BlogPost(MyBaseModel):
     content = TextField(null=True)
     online = IntegerField(default=0)
     slug = CharField()
+    send_as_newsletter = BooleanField(default=False)
 
     @property
     def teaser(self):
