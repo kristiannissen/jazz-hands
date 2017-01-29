@@ -9,3 +9,16 @@ six==1.10.0
 tornado==4.4.2
 Unidecode==0.4.19
 web.py==0.40.dev0
+backports-abc==0.5
+certifi==2016.9.26
+livereload==2.5.0
+Markdown==2.6.8
+peewee==2.8.5
+pep8==1.7.0
+pyaml==16.11.4
+PyYAML==3.12
+singledispatch==3.4.0.3
+six==1.10.0
+tornado==4.4.2
+Unidecode==0.4.19
+web.py==0.40.dev0
