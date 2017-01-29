@@ -1,28 +1,19 @@
 $def with (values)
-$var title: Index
+$var title = 'Hello Pussy'
 
-<article id="preview">
-  <div class="logo">
-    <a href="/">hello</a>
+  <div class="cf frame">
+      $for post in values['posts']:
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+        <div class="article-item">
+          <header class="post-header">
+            <h2 class="post-title" itemprop="name"><a href="/post/$post.slug/" itemprop="url">$post.title</a></h2>
+          </header>
+          <section class="post-excerpt" itemprop="description">
+            <p>$post.teaser</p>
+          </section>
+          <div class="post-meta">
+            <time datetime="13 March 2016">$post.when_created</time>
+          </div>
+        </div>
+      </article>
   </div>
-  <div class="heading">
-    
-  </div>
-</article>
-
-<!--
-<div class="mdl-grid">
-  $for post in values['posts']:
-    <div class="mdl-card mdl-cell--8-col">
-        <div class="mdl-card__title">
-            <h3><a href="/post/$post.slug/">$post.title</a></h3>
-        </div>
-        <div class="mdl-card__supporting-text">
-          $post.when_created
-        </div>
-        <div class="mdl-card__supporting-text">
-          $post.content
-        </div>
-    </div>
-</div>
-//-->

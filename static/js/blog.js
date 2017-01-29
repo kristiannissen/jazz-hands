@@ -27,13 +27,13 @@ var App = (function () {
 
         http.post( foo.getAttribute( 'action' ), data)
           .then( function ( resp ) {
-
+            console.log(resp);
             snackbar.MaterialSnackbar.showSnackbar({
               message: 'Blog Saved',
               actionHandler: function(event) {
                 event.preventDefault();
 
-                window.open('/'+ resp.blog_slug, '_blank');
+                window.open('/post/'+ resp.blog_slug +'/', '_blank');
               },
               actionText: 'Preview'
             }); 

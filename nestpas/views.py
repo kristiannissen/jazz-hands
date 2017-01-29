@@ -3,6 +3,7 @@
 import hashlib
 import web
 import json
+import markdown
 import logging
 from nestpas.models import *
 from nestpas.utils import *
@@ -11,6 +12,13 @@ from nestpas.utils import *
 TEMPLATE_ADMIN = "admin"
 TEMPTATE_FRONT = "layout"
 HASH_SALT = "supersecrethashsalt"
+
+
+t_globals = {
+    'datestr': web.datestr,
+    'markdown': markdown.markdown
+}
+render = web.template.render(globals=t_globals)
 
 
 class Index:
@@ -29,12 +37,13 @@ class Index:
 class Post:
     def GET(self, post_slug):
         """ Render single post """
+        print >>sys.stderr, "hello {0}".format(post_slug)
         post = BlogPost.get(BlogPost.slug == post_slug)
 
         render = web.template.render(base="layout")
         return render.post({
                 "blogpost_title": post.title,
-                "blogpost_content": post.content
+                "blogpost_content": markdown(post.content)
             })
 
 

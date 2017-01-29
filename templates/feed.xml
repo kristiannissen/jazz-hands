@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amplify Demo Site</title>
+    <description>Look how fast it is
+</description>
+    <link>http://yourdomain.com/amplify/</link>
+    <atom:link href="http://yourdomain.com/amplify/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 15 Mar 2016 04:03:22 +0000</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2016 04:03:22 +0000</lastBuildDate>
+    <generator>Jekyll v3.0.3</generator>
+    
+      <item>
+        <title>My New Post</title>
+        <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit!&lt;/p&gt;
+
+&lt;amp-img width=&quot;600&quot; height=&quot;500&quot; layout=&quot;responsive&quot; src=&quot;http://lorempixel.com/600/500/transport&quot;&gt;&lt;/amp-img&gt;
+
+&lt;p&gt;Nulla dapibus vestibulum ligula in sodales. Phasellus eu metus quam. Sed id varius diam. Morbi pellentesque lorem vitae ex commodo, sed dapibus ex dignissim. Etiam facilisis pellentesque gravida. Sed tempus diam sed odio tempor, tristique elementum erat condimentum. Ut volutpat dui ex, a auctor dolor pretium eget.&lt;/p&gt;
+
+&lt;p&gt;Vivamus nec mauris suscipit enim viverra tristique ut eget risus. Vestibulum ullamcorper at sem eu sodales. Praesent felis tellus, condimentum vitae purus id, consectetur interdum urna. Pellentesque laoreet non arcu volutpat euismod. Suspendisse sed enim non ex interdum sodales. Quisque vitae vestibulum turpis. Aenean nec est dolor.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Pellentesque quis mi at erat iaculis cursus. Phasellus ligula neque, pulvinar sed malesuada id, feugiat ac magna. Proin sed scelerisque metus. Pellentesque mi augue, egestas nec ante a, faucibus ullamcorper enim. Sed nisi felis, rutrum imperdiet aliquam nec, placerat vel odio. Nulla quis urna ut risus aliquam tempor.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;amp-img width=&quot;600&quot; height=&quot;300&quot; layout=&quot;responsive&quot; src=&quot;http://lorempixel.com/600/300/transport&quot;&gt;&lt;/amp-img&gt;
+
+&lt;p&gt;Nulla mi risus, lobortis quis lectus vel, gravida eleifend lacus. Proin mattis odio elit, nec vehicula diam varius vitae. Nunc a ipsum at justo rhoncus mattis. Proin auctor lorem quis libero viverra aliquam. Suspendisse quis tristique sapien. Integer eu felis vel orci dignissim suscipit pharetra vitae nisl. Ut viverra sed enim quis pretium. Etiam auctor a ante sed pharetra.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 13 Mar 2016 00:00:00 +0000</pubDate>
+        <link>http://yourdomain.com/amplify/2016/03/13/my-new-post.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/amplify/2016/03/13/my-new-post.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Ea eam nibh persecuti, partem habemus nominavi</title>
+        <description>&lt;p&gt;At labitur probatus eum, qui modo idque partem ne, ea has oratio sanctus cotidieque. Dicta persecuti sit ex. Discere facilis recteque sit no, in eripuit volumus adversarium vim. Ad sed meis nulla accusata. Ex posse accusam maluisset mei, id vix ignota cetero inimicus.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Nec amet pericula dissentiet…&lt;/p&gt;
+
+  &lt;p&gt;Nam liber tritani ei, urbanitas tincidunt usu et. Odio voluptua gubergren at cum. An porro mucius tibique nam, cu usu everti dignissim assueverit. Docendi patrioque constituto te sit. Qui lorem soluta ea, commune deserunt sed id. Accusam commune cotidieque his ea.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Pro hinc copiosae an, ad ius salutandi expetendis. Quo suavitate intellegat forensibus an. Sonet meliore consetetur te sea, in eam decore utroque, dicat verear et sit. Pro aperiam pertinax splendide id, IUS STET ELEIFEND INTELLEGAM ID.&lt;/p&gt;
+
+&lt;amp-img width=&quot;600&quot; height=&quot;300&quot; layout=&quot;responsive&quot; src=&quot;http://lorempixel.com/600/300/people&quot;&gt;&lt;/amp-img&gt;
+
+&lt;p&gt;Ea ullamcorper intellegebat pri!&lt;/p&gt;
+
+&lt;h3 id=&quot;vix-cu-alienum-evertitur&quot;&gt;Vix cu alienum evertitur&lt;/h3&gt;
+
+&lt;p&gt;Mea suas vituperatoribus et, virtute corpora quaestio cum ut. Ne solet nostrum complectitur pri, vis ut inani populo. Ad eligendi vituperata sadipscing pro, ad mea modo meis philosophia, an eos consul impedit qualisque. Eruditi reprimique id eum, in tincidunt percipitur vis.&lt;/p&gt;
+
+&lt;amp-youtube data-videoid=&quot;NpEaa2P7qZI&quot; layout=&quot;responsive&quot; width=&quot;480&quot; height=&quot;270&quot;&gt;&lt;/amp-youtube&gt;
+
+&lt;p&gt;Ne ius nominavi verterem. Principes voluptaria pro at. Sint mediocrem cum ea, his purto dicat scaevola ad. Per quem magna gubergren id, pri in noluisse salutatus imperdiet. In postea consequat percipitur vis, nam postea commodo lobortis an, ut atqui antiopam eloquentiam eum.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Erat officiis probatus eam ea, nibh legere insolens ad sit. Nec alii dicam ad, cibo regione per no. Verear invenire ut usu, nec mazim euripidis in. Molestie placerat id quo, quo dissentias complectitur ex. Ex probatus principes efficiantur pro, possit perfecto ut eum. Vix ei summo perpetua, enim adhuc vix ei, sed in homero delicata periculis. Praesent intellegat qui ne.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate>
+        <link>http://yourdomain.com/amplify/2016/03/08/example-post.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/amplify/2016/03/08/example-post.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

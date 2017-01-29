@@ -7,5 +7,5 @@ urls = (
     '/admin/', 'Admin',
     '/media/', 'Media',
     '/user/', 'User',
-    '/blog/(.+)?', 'Blog'
+    '/blog/(.+)?/', 'Blog'
 )

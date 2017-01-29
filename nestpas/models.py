@@ -34,6 +34,15 @@ class BlogPost(MyBaseModel):
     online = IntegerField(default=0)
     slug = CharField()
 
+    @property
+    def teaser(self):
+        words = self.content.split()
+        return " ".join(words[:20])
+
+    @property
+    def when_published(self):
+        return self.when_created.strftime('%d %m %Y')
+
 
 class MediaFile(MyBaseModel):
     filepath = CharField(max_length=255)
