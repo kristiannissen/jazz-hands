@@ -4,8 +4,8 @@ urls = (
     '/', 'Index',
     '/blog/(.+)/', 'Blog',
     '/login/', 'Login',
+    '/logout/', 'Logout',
     '/admin/', 'Admin',
     '/media/', 'Media',
-    '/user/', 'User',
-    '/post/(.+)?', 'Post'
+    '/entry/(.+)?', 'Entry'
 )

@@ -18,7 +18,7 @@ t_globals = {
     'datestr': web.datestr,
     'markdown': markdown.markdown
 }
-render = web.template.render(globals=t_globals)
+render = web.template.render(globals=t_globals, base="layout")
 
 
 class Index:
@@ -28,7 +28,6 @@ class Index:
                 BlogPost.when_created.desc()
             ).paginate(0, 10)
 
-        render = web.template.render(base="layout")
         return render.index({
                 "posts": posts
             })
@@ -39,7 +38,6 @@ class Blog:
         """ Render single post """
         post = BlogPost.get(BlogPost.slug == post_slug)
 
-        render = web.template.render(base="layout")
         return render.post({
                 "blogpost_title": post.title,
                 "blogpost_content": post.content,
@@ -61,7 +59,7 @@ class Admin:
         })
 
 
-class Post:
+class Entry:
     def GET(self, blog_id=None):
         """ Blog """
         if blog_id is None:
@@ -139,40 +137,49 @@ class Media:
         raise web.seeother('/media/')
 
 
-class User:
-    def GET(self):
-        """ User """
-        render = web.template.render(base="admin")
-        return render.user({})
-
-
 class Login:
     def GET(self):
         """ Login """
         cookies = web.cookies()
         logging.debug(cookies)
 
-        render = web.template.render(base='layout')
+        render = web.template.render(base="admin")
         return render.login({})
 
     def POST(self):
         """ Handle login """
         inp = web.input()
-        if inp.user_remember == '1':
-            logging.debug("Remember me feature")
-            # FIXME: Use const for cookie lifetime and hash secret
-            web.setcookie(
-                '_k',
-                hashlib.md5(
-                    "{0}-{1}".format(HASH_SALT, inp.user_mail)
-                ).hexdigest(),
-                360000
-            )
-
-        return "Hello ADMIN"
+        # FIXME: Use const for cookie lifetime and hash secret
+        if 'user_mail' in inp and 'user_pwd' in inp:
+            try:
+                user = User.get(
+                    User.mail == inp.user_mail,
+                    User.password == inp.user_pwd
+                )
+                logging.info("Login by user {}".format(user.id))
+                web.setcookie(
+                    '_k',
+                    hashlib.md5(
+                        "{0}-{1}".format(HASH_SALT, inp.user_mail)
+                    ),
+                    360000
+                )
+                raise web.seeother("/admin/")
+            except DoesNotExist:
+                # User not found in DB
+                logging.warning("Login attempt")
+                raise web.seeother("/login/")   
+        else:
+            # Form params not present
+            raise web.seeother("/login/")
 
 
 class Logout:
     def GET(self):
         """ Logout """
-        return "Logout"
+        web.setcookie(
+            '_k',
+            '',
+            -1
+        )
+        raise web.seeother("/login/")
