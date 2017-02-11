@@ -1,3 +1,5 @@
+from livereload import Server
+
 import web
 
 from nestpas.views import *
@@ -7,17 +9,20 @@ import sys
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 # web.config.debug = False
-web.ctx.debug = True
+web.ctx.debug = False
 
-app = web.application(urls, globals(), autoreload=True)
+app = web.application(urls, globals(), autoreload=False)
+webapp = app.wsgifunc()
 
-if not web.config.get('_session'):
-    init = {'auth': ''}
-    store = web.session.DiskStore('./sessions')
-    session = web.session.Session(app, store, initializer=init)
-    web.config._session = session
-else:
-    session = web.config._session
+# Setup session storage
+db = web.database(dbn='sqlite', db='dev.db')
+store = web.session.DBStore(db, 'sessions')
+session = web.session.Session(app, store,
+    initializer={'login': 0}
+)
 
 if __name__ == '__main__':
-    app.run()
+    ## app.run()
+    server = Server(webapp)
+    server.watch('static/', 'templates/', 'nestpas/')
+    server.serve(port=8080, host='localhost')

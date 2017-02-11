@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from functools import wraps
 import hashlib
 import web
 import json
@@ -36,7 +36,10 @@ class Index:
 class Blog:
     def GET(self, post_slug):
         """ Render single post """
-        post = BlogPost.get(BlogPost.slug == post_slug)
+        try:
+            post = BlogPost.get(BlogPost.slug == post_slug)
+        except DoesNotExist:
+            raise web.seeother("/go-away")
 
         return render.post({
                 "blogpost_title": post.title,
@@ -45,6 +48,12 @@ class Blog:
             })
 
 
+def authenticate(klass):
+    logging.info("Help {}")
+    return klass
+
+
+@authenticate
 class Admin:
     def GET(self):
         """ Admin """
@@ -164,6 +173,7 @@ class Login:
                     ),
                     360000
                 )
+                session.login = 1
                 raise web.seeother("/admin/")
             except DoesNotExist:
                 # User not found in DB
@@ -177,6 +187,7 @@ class Login:
 class Logout:
     def GET(self):
         """ Logout """
+        web.session.kill()
         web.setcookie(
             '_k',
             '',
