@@ -1,3 +1,6 @@
+/**
+ * require.js
+ */
 "use strict";
 
 function require ( file, callback ) {

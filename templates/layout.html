@@ -4,7 +4,9 @@ $def with (content)
   <head>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
-  <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet" async>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -167,7 +169,7 @@ body { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif;
 
 .post .post-meta { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif; }
 .post .post-title { font-weight: 700; font-style: normal; letter-spacing: -0.04em; font-size: 50px; line-height: 1.1; color: #333332; margin-bottom: 50px; }
-.post .author-image { background-image: url(assets/images/author.jpg); display: inline-block; width: 30px; height: 30px; line-height: 30px; margin-right: 8px; margin-bottom: -10px; float: left; background-size: cover; border-radius: 100%; text-indent: -9999px; }
+.post .author-image { background-image: url(/static/images/author.jpg); display: inline-block; width: 30px; height: 30px; line-height: 30px; margin-right: 8px; margin-bottom: -10px; float: left; background-size: cover; border-radius: 100%; text-indent: -9999px; }
 .post .post-meta-text { color: #b3b3b1; letter-spacing: -0.02em; font-weight: 400; font-style: normal; font-size: 14px; overflow: hidden; font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif; white-space: nowrap; text-overflow: ellipsis; }
 .post .post-content { width: 100%; font-family: Georgia, Cambria, "Times New Roman", Times, "Lora", serif; color: #333333; }
 .post .post-content h1, .post .post-content h2, .post .post-content h3 { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif; }
@@ -228,9 +230,35 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
   padding: 10px;
   max-width: 300px;
 }
+.newsletter-signup .field-helper {
+  display: block;
+}
 .newsletter-close {
   text-align: right;  
 }
+form.amp-form-submit-success [submit-success],
+  form.amp-form-submit-error [submit-error]{
+        margin-top: 16px;
+          }
+            form.amp-form-submit-success [submit-success] {
+                  color: green;
+                    }
+                      form.amp-form-submit-error [submit-error] {
+                            color: red;
+                              }
+                                form.amp-form-submit-success.hide-inputs > input {
+                                      display: none
+                                        }
+                                          .horizontal-display {
+                                                display: flex;
+                                                    align-items: center;
+                                                      }
+                                                        .other-input {
+                                                              margin: 0 16px;
+                                                                }
+                                                                  form {
+                                                                        margin: 16px;
+                                                                          }
   </style>
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
   <script async src="https://cdn.ampproject.org/v0.js"></script>
@@ -238,7 +266,7 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
   <body>
     <header class="site-header">
-      <a href="/" class="logo"><span class="logo"><amp-img src="/assets/images/logo.jpg" width="48" height="48" /></span></a>
+      <a href="/" class="logo"><span class="logo"><amp-img src="/static/images/logo.jpg" width="48" height="48" /></span></a>
 
       <div class="page-links">
         <a class="page-link" href="/">Forside</a> • <a class="page-link" href="/kontakt/">Kontakt</a>
@@ -279,18 +307,24 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 <div class="newsletter-signup">
   <div class="newsletter-close">
     <a href="">
-      <i class="close">close</i>
+      <i class="material-icons">close</i>
     </a>
   </div>
-  <form>
+  <form method="get" action-xhr="/newsletter/signup/">
     <label>Email</label>
-    <input type="mail" name="user_mail" value="">
+    <input type="mail" name="user_mail" value="" class="data-input">
     <span class="field-helper">
-      Få besked via email når der er nyt på hjemmesiden
+      <small id="newsletter-message">
+        Få besked via email når der er nyt på hjemmesiden.
+      </small>
     </span>
-    <button type="button">Send</button>
+    <button type="button" class="button button-primary other-input">Send</button>
   </form>
 </div>
 
+  <script type="text/javascript" src="/static/js/require.js"></script>
+  <script type="text/javascript">
+    require('home.js');
+  </script>
   </body>
 </html>

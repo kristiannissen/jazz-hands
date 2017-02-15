@@ -6,6 +6,7 @@
 var App = (function() {
 
   function _run() {
+    console.log('Hello Kitty');
   }
   /**
    * Public methods

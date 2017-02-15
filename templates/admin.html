@@ -18,29 +18,38 @@ $def with (content)
             <i class="material-icons"></i>
           </div>
           <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">$content.title</span>
+            <span class="mdl-layout-title">
+              $content.title
+            </span>
             <div class="mdl-layout-spacer"></div>
           </div>
         </header>
         <div class="mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-          <header></header>
+          <header>
+          </header>
           <nav class="mdl-navigation mdl-color--blue-grey-800">
-            <a href="/admin/" class="mdl-navigation__link">
-              <i class="material-icons">home</i>
-              Home
-            </a>
-            <a href="/media/" class="mdl-navigation__link">
-              <i class="material-icons">insert_photo</i>
-              Media
-            </a>
-            <a href="/users/" class="mdl-navigation__link">
-              <i class="material-icons">person</i>
-              User
-            </a>
-            <a href="/entry/" class="mdl-navigation__link">
-              <i class="material-icons">mode_edit</i>
-              Post
-            </a>
+            $if session.auth:
+              <a href="/admin/" class="mdl-navigation__link">
+                <i class="material-icons">home</i>
+                Home
+              </a>
+              <a href="/media/" class="mdl-navigation__link">
+                <i class="material-icons">insert_photo</i>
+                Media
+              </a>
+              <a href="/users/" class="mdl-navigation__link">
+                <i class="material-icons">person</i>
+                User
+              </a>
+              <a href="/entry/" class="mdl-navigation__link">
+                <i class="material-icons">mode_edit</i>
+                Post
+              </a>
+            $else:
+              <a href="/" class="mdl-navigation__link">
+                <i class="material-icons">home</i>
+                Home
+              </a>
           </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">

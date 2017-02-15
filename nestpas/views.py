@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from functools import wraps
+import sys
 import hashlib
 import web
 import json
@@ -15,7 +15,6 @@ HASH_SALT = "supersecrethashsalt"
 
 
 t_globals = {
-    'datestr': web.datestr,
     'markdown': markdown.markdown
 }
 render = web.template.render(globals=t_globals, base="layout")
@@ -48,13 +47,22 @@ class Blog:
             })
 
 
-def authenticate(klass):
-    logging.info("Help {}")
-    return klass
+def authenticate(func):
+    """ If auth isn't in session or auth isn't 1
+        redirect to login
+    """
+    def func_wrapper(*args, **kwargs):
+        if "auth" in web.ctx.session == False or web.ctx.session.get("auth", 0) == 0:
+            raise web.seeother("/login/")
+
+        return func(*args, **kwargs)
+
+    return func_wrapper
 
 
-@authenticate
 class Admin:
+
+    @authenticate
     def GET(self):
         """ Admin """
         posts = BlogPost.select().order_by(
@@ -63,12 +71,14 @@ class Admin:
 
         render = web.template.render(base="admin")
         return render.latest({
-            "user_mail": "Kitty",
+            "user_mail": "Kitty {}".format(web.ctx.session),
             "blog_posts": posts
         })
 
 
 class Entry:
+
+    @authenticate
     def GET(self, blog_id=None):
         """ Blog """
         if blog_id is None:
@@ -91,6 +101,7 @@ class Entry:
             "send_as_newsletter": post.send_as_newsletter
         })
 
+    @authenticate
     def POST(self, blog_id=None):
         """ Handle creating and editing blog posts """
         inp = web.input()
@@ -125,13 +136,17 @@ class Entry:
 
 
 class Media:
+
+    @authenticate
     def GET(self):
         """ Media """
         render = web.template.render(base="admin")
         return render.media({})
 
+    @authenticate
     def POST(self):
         inp = web.input(media_file={})
+        # FIXME: get real path
         filedir = '/Users/kristiannissen/Documents/python/jazz-hands/static'
         if 'media_file' in inp:
             filepath = inp.media_file.filename.replace('\\', '/')
@@ -150,7 +165,6 @@ class Login:
     def GET(self):
         """ Login """
         cookies = web.cookies()
-        logging.debug(cookies)
 
         render = web.template.render(base="admin")
         return render.login({})
@@ -170,10 +184,11 @@ class Login:
                     '_k',
                     hashlib.md5(
                         "{0}-{1}".format(HASH_SALT, inp.user_mail)
-                    ),
+                    ).hexdigest(),
                     360000
                 )
-                session.login = 1
+                web.ctx.session.auth = 1
+
                 raise web.seeother("/admin/")
             except DoesNotExist:
                 # User not found in DB
@@ -185,12 +200,15 @@ class Login:
 
 
 class Logout:
+
+    @authenticate
     def GET(self):
         """ Logout """
-        web.session.kill()
+        web.ctx.session.kill()
         web.setcookie(
             '_k',
             '',
             -1
         )
+        web.ctx.session.auth = 0
         raise web.seeother("/login/")
